@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="a43cf9e271b5bc564e880a0a4be63ab9c69c97f8">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0-4dbbbc897ce64c85c404ff62022be94d09ada938.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-56b31f87082ec6c567eaa38ea68948e897541d6c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\httpmime-4.0.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="9ded70b76b604f4b4b499cb15a6f7cd4ce490ba0">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\httpmime-4.0-6b555272c7af2548fec529591721d2606690dfb3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="45fbaab416fb5cff992e662d1f7a83786f084fc3">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-3.4.0-jar-with-dependencies-f7d36bf17bbe73a08559087679ecc8c3cab85934.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\classes-330599f5bfca6637e1a97d3c7ed277d99670e338.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\exploded-aar\com.android.support\design\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\classes-27ec1497a1d4a4d0e124571dee99b3ae8029fab6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\android-support-v4.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="e19387dc3b060af32f5401f84fbe246635256955">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\android-support-v4-00f45113686f165b6a3c12d10bc99b1af7419609.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-eab9e2fd945d4be144e160987c1b3432653d5216.jar" />
+    </item>
+    <item
+        jar="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\classes-d88896c80f4dcea8970794d2aad834ceb0a5ce8c.jar" />
+    </item>
+
+</items>

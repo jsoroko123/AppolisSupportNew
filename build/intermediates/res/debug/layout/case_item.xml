@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal"
+        android:tag="back" >
+           <Button
+                android:id="@+id/swipeBtStart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+               android:visibility="gone"
+                android:textSize="12sp"
+                android:layout_margin="1dp"
+                android:background="@drawable/background_green_button"
+                android:padding="10sp"
+                android:text="Start" />
+           <Button
+                android:id="@+id/swipeBtStop"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+               android:visibility="gone"
+                android:layout_margin="1dp"
+                android:background="@drawable/background_red_button"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Stop" />
+            <Button
+                android:id="@+id/swipeBtContact"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:background="@drawable/background_gray_button"
+                android:padding="5dp"
+                android:text="Assign" />
+            <Button
+               android:id="@+id/swipeBtAssign"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:layout_margin="1dp"
+               android:padding="5dp"
+               android:text="Contact"
+               android:background="@drawable/background_orange_button"
+               android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/swipeBtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_margin="1dp"
+                android:background="@drawable/background_blue_button"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Status" />
+            <Button
+                android:id="@+id/swipeBtNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_margin="1dp"
+                android:background="@drawable/background_blue2_button"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Notes" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/front"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp" >
+         
+		<FrameLayout
+            android:id="@+id/mainlayout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:foregroundGravity="bottom"
+            android:orientation="vertical">
+
+            <ImageView
+            android:id="@+id/img_case"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+			android:focusable="false"
+			android:focusableInTouchMode="false"
+            android:src="@drawable/red" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                                    android:layout_gravity="center_horizontal|center_vertical">"
+
+                <TextView
+                    android:id="@+id/tv_case_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="30123"
+                    android:textColor="@color/white"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+        
+        
+        
+        
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+           <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+		        <TextView
+                    android:id="@+id/tv_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:text="Lighting Supply"
+                    android:textColor="@color/Black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                
+                  <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginLeft="5dp"
+                    android:text="2014-01-12 2:30PM"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/Black"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+ 				<TextView
+ 				    android:layout_width="wrap_content"
+ 				    android:layout_height="wrap_content"
+ 				    android:gravity="left"
+ 				    android:text="Issue:  "
+ 				    android:textColor="@color/Black"
+ 				    android:textSize="12sp"
+ 				    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_issue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Having a lot of Issues with WOW!"
+                    android:maxLines="1"
+                    android:layout_weight="2"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:textColor="@color/Black"
+                    android:textSize="12sp" />
+                <ImageView
+                    android:id="@+id/img_sticky"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/stickynote" />
+                
+		         <ImageView
+		           android:id="@+id/img_attach"
+		           android:layout_width="17dp"
+		           android:layout_height="17dp"
+		           android:layout_gravity="right"
+		           android:src="@drawable/attachment" />
+                   <ImageView
+		           android:id="@+id/img_ex"
+		           android:layout_width="17dp"
+		           android:layout_height="17dp"
+		           android:layout_gravity="right"
+		           android:src="@drawable/exclamation" />
+            </LinearLayout>
+
+          
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+              <TextView
+                  android:id="@+id/tv_assignment_title"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="left"
+                  android:text="Assigned: "
+                  android:textColor="@color/Black"
+                  android:textSize="12sp"
+                  android:textStyle="bold" />
+                
+               <TextView
+                    android:id="@+id/tv_assignment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Jeff Soroko"
+                    android:textColor="@color/Black"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_submittedby_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Assigned: "
+                    android:visibility="gone"
+                    android:textColor="@color/Black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_submittedby"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:visibility="gone"
+                    android:text="Jeff Soroko"
+                    android:textColor="@color/Black"
+                    android:textSize="12sp"/>
+      
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:text="Status: "
+                    android:textColor="@color/Black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                 <TextView
+                     android:id="@+id/tv_status"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginRight="5dp"
+                     android:gravity="right"
+                     android:text="Open"
+                     android:textColor="@color/Black"
+                     android:textSize="12sp" />
+            
+          </LinearLayout>
+        </LinearLayout>
+
+      
+    </LinearLayout>
+
+</FrameLayout><!-- From: file:/C:/Users/Jeffery/Desktop/AppolisSupport/res/layout/case_item.xml -->

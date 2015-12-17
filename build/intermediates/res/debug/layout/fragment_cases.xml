@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+	android:id="@+id/linear"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<TextView
+		android:id="@+id/tvNoCases"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="No Open Cases"
+		android:textSize="20dp"
+		android:layout_marginTop="25dp"
+		android:visibility="gone"
+		android:textColor="@color/GrayAppolis"
+		android:layout_gravity="center_horizontal" />
+	<com.handmark.pulltorefresh.library.PullToRefreshSwipeListView
+		android:id="@+id/lv_support_cases"
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+		android:headerDividersEnabled="true"
+		android:footerDividersEnabled="true"
+		android:layout_weight="1.0"
+		android:cacheColorHint="#fff"
+		android:divider="@color/Gray42"
+       	android:dividerHeight="0.5dp"
+		android:fastScrollEnabled="false"
+		xmlns:swipe="http://schemas.android.com/apk/res-auto"
+       	xmlns:ptr="http://schemas.android.com/apk/res-auto"
+       	ptr:ptrMode="pullFromEnd"
+        swipe:swipeActionLeft="reveal"
+        swipe:swipeBackView="@+id/back"
+        swipe:swipeCloseAllItemsWhenMoveList="true"
+        swipe:swipeFrontView="@+id/front"
+        swipe:swipeMode="left">
+	</com.handmark.pulltorefresh.library.PullToRefreshSwipeListView>
+
+</LinearLayout>
+<!-- From: file:/C:/Users/Jeffery/Desktop/AppolisSupport/res/layout/fragment_cases.xml -->

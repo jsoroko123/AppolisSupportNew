@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_gray"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/tvErrorDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="System.Data.SqlClient.SqlException (0x80131904): The OLE DB provider SQLNCLI10 for linked server WASP-TEST does
+        not contain the table VPRCH.dbo.SOP10100. The table either does not exist or the current user does not have permissions on that table.
+        at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction) at
+        System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasCon"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

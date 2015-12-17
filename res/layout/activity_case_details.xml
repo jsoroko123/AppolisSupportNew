@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+      android:layout_weight="3"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ListView android:id="@+id/case_details_list" 
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:divider="@null"
+   
+        android:layout_weight="3"
+		android:dividerHeight="0dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="bottom"
+        android:background="@drawable/appolis"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+    	<EditText
+    	    android:id="@+id/txt_submit_response"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:background="@android:color/transparent"
+    	    android:ellipsize="end"
+    	    android:hint="Enter Your Response"
+    	    android:padding="10dip"
+    	    android:layout_weight="2"
+    	    android:singleLine="false"
+    	    android:textColor="@color/Black"
+    	    android:textColorHint="#575656"
+    	    android:textSize="14sp"
+    	    android:textStyle="bold" />
+
+		<ImageView
+			android:id="@+id/img_ex"
+			android:layout_width="25dp"
+			android:layout_height="match_parent"
+			android:layout_gravity="right"
+			android:clickable="true"
+			android:src="@drawable/attachment" />
+    	
+    	  <Button
+    	      android:id="@+id/btn_submit_response"
+    	      android:layout_width="wrap_content"
+    	      android:layout_height="wrap_content"
+    	      android:layout_marginLeft="10dp"
+    	      android:text="Submit"
+    	      android:textSize="14sp"
+    	      android:textColor="@color/Black" />
+    	  </LinearLayout>
+
+</LinearLayout>

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.appolissupport.MainActivity;
+import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.fragments.CasesFragment;
 import com.support.objects.SupportCases;

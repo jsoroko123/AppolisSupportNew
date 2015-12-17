@@ -11,7 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 
-import com.example.appolissupport.CaseService;
+import com.support.main.CaseService;
 
 
 public class ScheduleReceiver extends BroadcastReceiver {

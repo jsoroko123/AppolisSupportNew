@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name=".LoginActivity"
+            android:name="com.support.main.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.support.main.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity

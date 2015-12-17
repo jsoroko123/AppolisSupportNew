@@ -1,11 +1,9 @@
 
 package com.support.adapters;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import com.example.appolissupport.MainActivity;
+import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.objects.Details;
 import android.annotation.SuppressLint;

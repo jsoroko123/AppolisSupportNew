@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name=".SplashActivity"
+            android:name="com.support.main.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +32,19 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.support.main.LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.support.main.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/app_name" >
         </activity>
 
         <service
-            android:name=".CaseService"
+            android:name="com.support.main.CaseService"
             android:exported="false" >
         </service>
 

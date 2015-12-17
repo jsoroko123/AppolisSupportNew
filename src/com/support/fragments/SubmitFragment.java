@@ -3,7 +3,6 @@ package com.support.fragments;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.appolissupport.MainActivity;
+import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.objects.CaseReason;
 import com.support.objects.ClientUser;
@@ -37,7 +36,6 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -69,8 +67,10 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     public static Spinner spinner2;
     public static Spinner spinner3;
     public static Spinner spinner4;
+    public static Spinner spinner5;
     private TextView tvClient;
     private TextView tvUsers;
+    private TextView tvEnvironment;
     public static EditText etSubject;
     public static EditText etMainComments;
     public static String spinUserID = "0";
@@ -99,6 +99,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         lvAttachList.setOnItemClickListener(this);
         tvClient=(TextView)rootView.findViewById(R.id.tvClients);
         tvUsers=(TextView)rootView.findViewById(R.id.tvUsers);
+        tvEnvironment=(TextView)rootView.findViewById(R.id.tvEnvironment);
 
         spinner=(Spinner)rootView.findViewById(R.id.spinnerClients);
 
@@ -107,6 +108,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         spinner2.setClickable(false);
         spinner3 = (Spinner) rootView.findViewById(R.id.spSeverity);
         spinner4 = (Spinner) rootView.findViewById(R.id.spArea);
+        spinner5 = (Spinner) rootView.findViewById(R.id.spinnerEnvironment);
         etSubject = (EditText)rootView.findViewById(R.id.etSubject);
         etMainComments = (EditText)rootView.findViewById(R.id.etResp);
         etMainComments.setSelection(0);
@@ -120,15 +122,18 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
             spinner.setVisibility(View.VISIBLE);
             spinner2.setVisibility(View.VISIBLE);
             spinner3.setVisibility(View.VISIBLE);
-
+            spinner5.setVisibility(View.GONE);
             tvClient.setVisibility(View.VISIBLE);
             tvUsers.setVisibility(View.VISIBLE);
+            tvEnvironment.setVisibility(View.GONE);
         } else {
             support = "0";
             spinner.setVisibility(View.GONE);
             spinner2.setVisibility(View.GONE);
+            spinner5.setVisibility(View.VISIBLE);
             tvClient.setVisibility(View.GONE);
             tvUsers.setVisibility(View.GONE);
+            tvEnvironment.setVisibility(View.VISIBLE);
         }
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

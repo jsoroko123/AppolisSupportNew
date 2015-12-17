@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.appolissupport.MainActivity;
+import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 
 public class HomeFragment extends Fragment {

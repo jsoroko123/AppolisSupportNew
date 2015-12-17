@@ -1,7 +1,6 @@
 package com.support.fragments;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -30,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.appolissupport.MainActivity;
+import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.fortysevendeg.swipelistview.BaseSwipeListViewListener;
 import com.fortysevendeg.swipelistview.SwipeListView;
@@ -143,7 +142,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 								DateUtils.FORMAT_SHOW_TIME
 										| DateUtils.FORMAT_SHOW_DATE
 										| DateUtils.FORMAT_ABBREV_ALL);
-						// Update the LastUpdatedLabel
+						//  Update the LastUpdatedLabel
 						refreshView.getLoadingLayoutProxy()
 								.setLastUpdatedLabel(label);
 

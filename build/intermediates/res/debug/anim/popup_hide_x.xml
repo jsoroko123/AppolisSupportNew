@@ -2,4 +2,4 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 	<translate android:fromXDelta="0" android:toXDelta="-100%p" android:duration="750"/>
 </set>
-<!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/anim/popup_hide_x.xml -->
+<!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/anim/popup_hide_x.xml -->

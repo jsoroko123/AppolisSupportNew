@@ -4,4 +4,4 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:fromXDelta="100%p"
     android:toXDelta="0"
-    android:duration="325" /><!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/anim/rail.xml -->
+    android:duration="325" /><!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/anim/rail.xml -->

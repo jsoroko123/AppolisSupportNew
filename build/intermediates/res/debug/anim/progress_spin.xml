@@ -3,4 +3,4 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/appolis_logo" android:duration="150" />
 
-</animation-list><!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/anim/progress_spin.xml -->
+</animation-list><!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/anim/progress_spin.xml -->

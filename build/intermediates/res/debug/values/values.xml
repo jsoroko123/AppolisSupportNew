@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/color.xml -->
     <eat-comment/>
     <color name="AppBlue">#C6D8E5</color>
     <color name="BarrierVertical">#809C9C9C</color>
@@ -80,10 +80,10 @@
     <color name="YellowDark">#f6d222</color>
     <color name="YellowHeader">#D09B2B</color>
     <color name="YellowLight">#e8d08e</color>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/colors.xml -->
     <eat-comment/>
     <color name="black_overlay">#66000000</color>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/color.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/color.xml -->
     <eat-comment/>
     <color name="blueBackground">#156192</color>
     <color name="blueDeep">#032230</color>
@@ -101,7 +101,7 @@
     <declare-styleable name="ButtonBarContainerTheme"><attr format="reference" name="metaButtonBarStyle"/><attr format="reference" name="metaButtonBarButtonStyle"/></declare-styleable>
     <declare-styleable name="PullToRefresh"><attr format="reference|color" name="ptrRefreshableViewBackground"/><attr format="reference|color" name="ptrHeaderBackground"/><attr format="reference|color" name="ptrHeaderTextColor"/><attr format="reference|color" name="ptrHeaderSubTextColor"/><attr name="ptrMode"><flag name="disabled" value="0x0"/><flag name="pullFromStart" value="0x1"/><flag name="pullFromEnd" value="0x2"/><flag name="both" value="0x3"/><flag name="manualOnly" value="0x4"/><flag name="pullDownFromTop" value="0x1"/><flag name="pullUpFromBottom" value="0x2"/></attr><attr format="reference|boolean" name="ptrShowIndicator"/><attr format="reference" name="ptrDrawable"/><attr format="reference" name="ptrDrawableStart"/><attr format="reference" name="ptrDrawableEnd"/><attr format="reference|boolean" name="ptrOverScroll"/><attr format="reference" name="ptrHeaderTextAppearance"/><attr format="reference" name="ptrSubHeaderTextAppearance"/><attr name="ptrAnimationStyle"><flag name="rotate" value="0x0"/><flag name="flip" value="0x1"/></attr><attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrListViewExtrasEnabled"/><attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/><attr format="reference|color" name="ptrAdapterViewBackground"/><attr format="reference" name="ptrDrawableTop"/><attr format="reference" name="ptrDrawableBottom"/></declare-styleable>
     <declare-styleable name="SwipeListView"><attr format="boolean" name="swipeOpenOnLongPress"/><attr format="integer" name="swipeAnimationTime"/><attr format="dimension" name="swipeOffsetLeft"/><attr format="dimension" name="swipeOffsetRight"/><attr format="boolean" name="swipeCloseAllItemsWhenMoveList"/><attr format="reference" name="swipeFrontView"/><attr format="reference" name="swipeBackView"/><attr format="enum" name="swipeMode"><enum name="none" value="0"/><enum name="both" value="1"/><enum name="right" value="2"/><enum name="left" value="3"/></attr><attr format="enum" name="swipeActionLeft"><enum name="reveal" value="0"/><enum name="dismiss" value="1"/><enum name="choice" value="2"/></attr><attr format="enum" name="swipeActionRight"><enum name="reveal" value="0"/><enum name="dismiss" value="1"/><enum name="choice" value="2"/></attr><attr format="reference" name="swipeDrawableChecked"/><attr format="reference" name="swipeDrawableUnchecked"/></declare-styleable>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -112,44 +112,44 @@
     <dimen name="indicator_internal_padding">4dp</dimen>
     <dimen name="indicator_right_padding">10dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/ids.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/ids.xml -->
     <eat-comment/>
     <item name="fgelv_tag_changed_visibility" type="id"/>
     <item name="gridview" type="id"/>
     <item name="scrollview" type="id"/>
     <item name="webview" type="id"/>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_example"/>
     <string name="action_logout">Log Out</string>
     <string name="action_settings">Settings</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings_activity_login.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">Appolis Support</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings_activity_login.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="error_field_required">This field is required</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings.xml -->
     <eat-comment/>
     <string name="hello_world">Hello world!</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings_activity_login.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="plus_disconnect">Disconnect from Google+</string>
     <string name="plus_sign_out">Switch Google+ account</string>
     <string name="prompt_email">Username</string>
     <string name="prompt_password">Password</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/pull_refresh_strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/pull_refresh_strings.xml -->
     <eat-comment/>
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
     <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
@@ -157,14 +157,14 @@
     <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
     <string name="pull_to_refresh_refreshing_label">Loading…</string>
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_case_details">Case Details</string>
     <string name="title_activity_details_fragment">DetailsFragment</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings_activity_login.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="title_activity_login">Sign in</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_section1">Statistics</string>
@@ -172,7 +172,7 @@
     <string name="title_section3">Submit a Case</string>
     <string name="title_section4">Integration Errors</string>
     <string name="title_section5">Client List</string>
-    <!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <item name="android:windowBackground">@drawable/appolis_gray</item>

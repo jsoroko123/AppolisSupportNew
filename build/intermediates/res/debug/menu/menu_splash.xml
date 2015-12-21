@@ -4,4 +4,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
 </menu>
-<!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/menu/menu_splash.xml -->
+<!-- From: file:/C:/Users/Jeffery/AndroidStudioProjects/AppolisSupportNew/res/menu/menu_splash.xml -->

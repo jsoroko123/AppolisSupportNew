@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\android-support-v4.jar"
+        jar="C:\Users\jeffso\Documents\AppolisSupportNew\libs\android-support-v4.jar"
         jumboMode="false"
         revision="21.1.0"
         sha1="e19387dc3b060af32f5401f84fbe246635256955">
-        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\android-support-v4-00f45113686f165b6a3c12d10bc99b1af7419609.jar" />
+        <dex dex="C:\Users\jeffso\Documents\AppolisSupportNew\build\intermediates\pre-dexed\debug\android-support-v4-b94b15559343440e50fa371aaa14e1afecf58898.jar" />
     </item>
     <item
-        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\nineoldandroids-2.4.0.jar"
-        jumboMode="false"
-        revision="21.1.0"
-        sha1="a43cf9e271b5bc564e880a0a4be63ab9c69c97f8">
-        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0-4dbbbc897ce64c85c404ff62022be94d09ada938.jar" />
-    </item>
-    <item
-        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar"
-        jumboMode="false"
-        revision="21.1.0"
-        sha1="45fbaab416fb5cff992e662d1f7a83786f084fc3">
-        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-3.4.0-jar-with-dependencies-f7d36bf17bbe73a08559087679ecc8c3cab85934.jar" />
-    </item>
-    <item
-        jar="C:\Users\Jeffery\Desktop\AppolisSupport\libs\httpmime-4.0.jar"
+        jar="C:\Users\jeffso\Documents\AppolisSupportNew\libs\httpmime-4.0.jar"
         jumboMode="false"
         revision="21.1.0"
         sha1="9ded70b76b604f4b4b499cb15a6f7cd4ce490ba0">
-        <dex dex="C:\Users\Jeffery\Desktop\AppolisSupport\build\intermediates\pre-dexed\debug\httpmime-4.0-6b555272c7af2548fec529591721d2606690dfb3.jar" />
+        <dex dex="C:\Users\jeffso\Documents\AppolisSupportNew\build\intermediates\pre-dexed\debug\httpmime-4.0-26c190ad04c4bb221352e8cf47ea06d5c3f2dcc0.jar" />
+    </item>
+    <item
+        jar="C:\Users\jeffso\Documents\AppolisSupportNew\libs\nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="a43cf9e271b5bc564e880a0a4be63ab9c69c97f8">
+        <dex dex="C:\Users\jeffso\Documents\AppolisSupportNew\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0-12ef5d655132ea28dfd03b39093107473596ad85.jar" />
+    </item>
+    <item
+        jar="C:\Users\jeffso\Documents\AppolisSupportNew\libs\ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="45fbaab416fb5cff992e662d1f7a83786f084fc3">
+        <dex dex="C:\Users\jeffso\Documents\AppolisSupportNew\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-3.4.0-jar-with-dependencies-5ad45fdb8a054664a6f998c54568511c6bfdefd5.jar" />
     </item>
 
 </items>

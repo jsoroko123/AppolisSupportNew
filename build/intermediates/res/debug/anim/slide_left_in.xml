@@ -17,4 +17,4 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate android:fromXDelta="100%p" android:toXDelta="0" android:duration="300"  android:fillAfter="false" />
 </set>
-<!-- From: file:/C:/Users/Jeffery/Desktop/AppolisSupport/res/anim/slide_left_in.xml -->
+<!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/anim/slide_left_in.xml -->

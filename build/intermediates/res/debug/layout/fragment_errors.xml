@@ -31,7 +31,16 @@
 
 
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tvNoErrors"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="No Logged Errors"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:textColor="@color/GrayAppolis"
+        android:layout_gravity="center_horizontal" />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -49,4 +58,4 @@
 
 
 </LinearLayout>
-<!-- From: file:/C:/Users/Jeffery/Desktop/AppolisSupport/res/layout/fragment_errors.xml -->
+<!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/layout/fragment_errors.xml -->

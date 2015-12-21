@@ -3,4 +3,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="14sp"
-    android:textColor="@color/Black" /><!-- From: file:/C:/Users/Jeffery/Desktop/AppolisSupport/res/layout/spinner_item.xml -->
+    android:textColor="@color/Black" /><!-- From: file:/C:/Users/jeffso/Documents/AppolisSupportNew/res/layout/spinner_item.xml -->

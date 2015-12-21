@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppolisSupport.iml" filepath="$PROJECT_DIR$/AppolisSupport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AppolisSupportNew.iml" filepath="$PROJECT_DIR$/AppolisSupportNew.iml" />
     </modules>
   </component>
 </project>

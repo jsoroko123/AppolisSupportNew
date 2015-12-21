@@ -282,8 +282,6 @@ public class CasesAdapter extends ArrayAdapter<SupportCases> {
 					itemDetailHolder.swipeBtStartTimer.setVisibility(View.GONE);
 					itemDetailHolder.swipeBtStopTimer.setVisibility(View.GONE);
 					//itemDetailHolder.swipeBtAssign.setVisibility(View.GONE);
-					itemDetailHolder.swipeBtAssign.setWidth(50);
-					itemDetailHolder.swipeBtAssign.setGravity(Gravity.RIGHT);
 					itemDetailHolder.swipeBtStatus.setVisibility(View.GONE);
 					itemDetailHolder.swipBtnContact.setVisibility(View.GONE);
 					itemDetailHolder.swipeBTNotes.setVisibility(View.GONE);

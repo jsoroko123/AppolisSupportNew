@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Appolis Support</string>
-    <string name="title_section1">Stats</string>
+    <string name="title_section1">Statistics</string>
     <string name="title_section2">Support Cases</string>
     <string name="title_section3">Submit a Case</string>
     <string name="title_section4">Integration Errors</string>

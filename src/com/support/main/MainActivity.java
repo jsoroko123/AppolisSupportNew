@@ -42,7 +42,7 @@ import com.example.appolissupport.R;
 import com.support.fragments.CasesFragment;
 import com.support.fragments.ClientsFragment;
 import com.support.fragments.ErrorsFragment;
-import com.support.fragments.HomeFragment;
+import com.support.fragments.StatsFragment;
 import com.support.fragments.SubmitFragment;
 import com.support.utilities.Constants;
 import com.support.utilities.FileUpload;
@@ -166,17 +166,17 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 				fragment = new CasesFragment();
 				break;
 	        case 1:
-	            fragment = new HomeFragment();
-	            break;
+				fragment = new SubmitFragment();
+				break;
 	        case 2:
-	            fragment = new SubmitFragment();
+	            fragment = new ErrorsFragment();
 				break;
 	        case 3:
-	            fragment = new ErrorsFragment();
-	            break;
+				fragment = new ClientsFragment();
+				break;
 	        case 4:
-	            fragment = new ClientsFragment();
-	            break;
+				fragment = new StatsFragment();
+				break;
 	            
 	    }
 	    fragmentManager.beginTransaction()
@@ -237,13 +237,22 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 		} else if (id == R.id.action_example) {
 			showPopUpForScanner(this);
 		} else if (id == R.id.action_send) {
-			if (SubmitFragment.spinner.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner2.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner3.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner4.getSelectedItem().toString().contains("Select") || SubmitFragment.etSubject.getText().toString().isEmpty() || SubmitFragment.etMainComments.getText().toString().isEmpty()){
-				Toast.makeText(getApplication(),"All information must be filled in.",Toast.LENGTH_LONG).show();
-			}else {
-				SubmitFragment sf = new SubmitFragment();
-				sf.InsertNewCase(MainActivity.this,this, Integer.valueOf(SubmitFragment.spinUserID), String.valueOf(SubmitFragment.spinner3.getSelectedItemPosition() - 1), SubmitFragment.etSubject.getText().toString(), SubmitFragment.etMainComments.getText().toString(), SubmitFragment.uniqueID, String.valueOf(SubmitFragment.spinReasonID));
-
+			if(isSupport) {
+				if (SubmitFragment.spinner.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner2.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner3.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner4.getSelectedItem().toString().contains("Select") || SubmitFragment.etSubject.getText().toString().isEmpty() || SubmitFragment.etMainComments.getText().toString().isEmpty()) {
+					Toast.makeText(getApplication(), "All information must be filled in.", Toast.LENGTH_LONG).show();
+				} else {
+					SubmitFragment sf = new SubmitFragment();
+					sf.InsertNewCase(MainActivity.this, this, Integer.valueOf(SubmitFragment.spinUserID), String.valueOf(SubmitFragment.spinner3.getSelectedItemPosition() - 1), SubmitFragment.etSubject.getText().toString(), SubmitFragment.etMainComments.getText().toString(), SubmitFragment.uniqueID, String.valueOf(SubmitFragment.spinReasonID));
+				}
+			} else {
+				if (SubmitFragment.spinner3.getSelectedItem().toString().contains("Select") || SubmitFragment.spinner4.getSelectedItem().toString().contains("Select") || SubmitFragment.etSubject.getText().toString().isEmpty() || SubmitFragment.etMainComments.getText().toString().isEmpty()) {
+					Toast.makeText(getApplication(), "All information must be filled in.", Toast.LENGTH_LONG).show();
+				} else {
+					SubmitFragment sf = new SubmitFragment();
+					sf.InsertNewCase(MainActivity.this, this, spm2.getInt("UserID", 0), String.valueOf(SubmitFragment.spinner3.getSelectedItemPosition() - 1), SubmitFragment.etSubject.getText().toString(), SubmitFragment.etMainComments.getText().toString(), SubmitFragment.uniqueID, String.valueOf(SubmitFragment.spinReasonID));
+				}
 			}
+
 		} else if (id == R.id.action_attach) {
 			Intent pickIntent = new Intent();
 			pickIntent.setType("image/*");

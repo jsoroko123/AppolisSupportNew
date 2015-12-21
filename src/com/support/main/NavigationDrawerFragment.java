@@ -92,11 +92,12 @@ public class NavigationDrawerFragment extends Fragment {
 		selectItem(mCurrentSelectedPosition);
 		dataList = new ArrayList<NavigationItem>();
 		dataList.add(new NavigationItem(R.string.title_section2, R.drawable.cases));
-		dataList.add(new NavigationItem(R.string.title_section1, R.drawable.stats));
+
 		dataList.add(new NavigationItem(R.string.title_section3, R.drawable.support));
 		dataList.add(new NavigationItem(R.string.title_section4, R.drawable.error));
 		dataList.add(new NavigationItem(R.string.title_section5, R.drawable.clients));
-		
+		dataList.add(new NavigationItem(R.string.title_section1, R.drawable.stats));
+
 	}
 
 	@Override

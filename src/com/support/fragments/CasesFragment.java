@@ -123,6 +123,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 
 		if(spm.getBoolean("IsSupport", false)){
 			ClientName = "0";
+
 		} else {
 			ClientName = spm.getString("ClientName", "");
 		}

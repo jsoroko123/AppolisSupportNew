@@ -42,6 +42,7 @@ public class ErrorsFragment extends Fragment {
 
 	private Spinner spinner;
 	private TextView tvErrorClient;
+	private static TextView tvNoErrors;
 
 	private final String METHOD_NAME = "ListClientErrors";
 	private final String SOAP_ACTION = Constants.NAMESPACE+METHOD_NAME;
@@ -61,6 +62,7 @@ public class ErrorsFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_errors, container,
 				false);
 		spm = new SharedPreferenceManager(getActivity());
+		tvNoErrors = (TextView) rootView.findViewById(R.id.tvNoErrors);
 		lvErrors = (ExpandableListView) rootView.findViewById(R.id.attach_list);
 		lvErrors.setChoiceMode(ExpandableListView.CHOICE_MODE_SINGLE);
 		lvErrors.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -211,6 +213,11 @@ public class ErrorsFragment extends Fragment {
 			listAdapter = new ExpandableListAdapter(getActivity(), theParentList);
 			listAdapter.notifyDataSetChanged();
 			lvErrors.setAdapter(listAdapter);
+			if(lvErrors.getCount() <= 0){
+				tvNoErrors.setVisibility(View.VISIBLE);
+			} else{
+				tvNoErrors.setVisibility(View.GONE);
+			}
 
 		}
 

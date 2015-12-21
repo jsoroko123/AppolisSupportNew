@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 
-public class HomeFragment extends Fragment {
+public class StatsFragment extends Fragment {
 	
-	public HomeFragment() {
+	public StatsFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		MainActivity.FragPageTitle = "Appolis Support";
+		MainActivity.FragPageTitle = "Statistics";
 		View rootView = inflater.inflate(R.layout.fragment_home, container,
 				false);
 		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

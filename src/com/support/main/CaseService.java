@@ -54,8 +54,6 @@ public class CaseService extends Service {
             stopSelf();
             return;
         }
-        // jdo the actual work, in a separate thread
-        //
         new PollTask().execute();
     }
 

@@ -53,6 +53,9 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     private final String SOAP_ACTION4 = Constants.NAMESPACE+METHOD_NAME4;
     private final String METHOD_NAME5 = "ListCaseReasons";
     private final String SOAP_ACTION5 = Constants.NAMESPACE+METHOD_NAME5;
+    private final String METHOD_NAME6 = "ListClientSites";
+    private final String SOAP_ACTION6 = Constants.NAMESPACE+METHOD_NAME6;
+
     public static String TAG = "PGGURU";
 	private ArrayList<String> listClients = new ArrayList<String>();
     private ArrayList<ClientUser> listClientUsers = new ArrayList<ClientUser>();
@@ -259,27 +262,64 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
 		@Override
 		protected Void doInBackground(String... params) {
 			//Create request
-			SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME);
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-					SoapEnvelope.VER11);
-			envelope.dotNet = true;
-			//Set output SOAP object
-			envelope.setOutputSoapObject(request);
-			//Create HTTP call object
-			HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
-
             try {
-				//Fill Client List
-				androidHttpTransport.call(SOAP_ACTION, envelope);
-				SoapObject response = (SoapObject) envelope.getResponse();
-				for (int i = 0; i < response.getPropertyCount(); i++) {
+            if(spm.getBoolean("IsSupport", false)) {
+                SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                        SoapEnvelope.VER11);
+                envelope.dotNet = true;
+                //Set output SOAP object
+                envelope.setOutputSoapObject(request);
+                //Create HTTP call object
+                HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
 
-					Object property = response.getProperty(i);
-					SoapObject info = (SoapObject) property;
-					listClients.add(info.getProperty("ClientName").toString().trim());
+
+                //Fill Client List
+                androidHttpTransport.call(SOAP_ACTION, envelope);
+                SoapObject response = (SoapObject) envelope.getResponse();
+                for (int i = 0; i < response.getPropertyCount(); i++) {
+
+                    Object property = response.getProperty(i);
+                    SoapObject info = (SoapObject) property;
+                    listClients.add(info.getProperty("ClientName").toString().trim());
                 }
 
                 listClients.add(0, "Select Client");
+            } else {
+                SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME6);
+                PropertyInfo supportCasesPI = new PropertyInfo();
+                supportCasesPI.setName("clientName");
+                supportCasesPI.setValue(spm.getString("ClientName",""));
+                supportCasesPI.setType(String.class);
+                request.addProperty(supportCasesPI);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                        SoapEnvelope.VER11);
+                envelope.dotNet = true;
+                //Set output SOAP object
+                envelope.setOutputSoapObject(request);
+                //Create HTTP call object
+                HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+
+
+                //Fill Client List
+                androidHttpTransport.call(SOAP_ACTION6, envelope);
+                SoapObject response = (SoapObject) envelope.getResponse();
+                for (int i = 0; i < response.getPropertyCount(); i++) {
+
+                    Object property = response.getProperty(i);
+                    SoapObject info = (SoapObject) property;
+                    listClients.add(info.getProperty("ClientName").toString().trim());
+                }
+            }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+
+
+
+
                 //Add Severities
                 listSeverity.add(Constants.LEVEL1);
                 listSeverity.add(Constants.LEVEL2);
@@ -288,29 +328,30 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
                 listSeverity.add(0, "Select Severity");
 
 
+                try{
+                    /////////////////////////////////////
+                    SoapObject request2 = new SoapObject(Constants.NAMESPACE, METHOD_NAME5);
 
-                /////////////////////////////////////
-                SoapObject request2 = new SoapObject(Constants.NAMESPACE, METHOD_NAME5);
-                SoapSerializationEnvelope envelope2 = new SoapSerializationEnvelope(
-                        SoapEnvelope.VER11);
-                envelope2.dotNet = true;
-                //Set output SOAP object
-                envelope2.setOutputSoapObject(request2);
-                //Create HTTP call object
-                HttpTransportSE androidHttpTransport2 = new HttpTransportSE(Constants.URL);
+                    SoapSerializationEnvelope envelope2 = new SoapSerializationEnvelope(
+                            SoapEnvelope.VER11);
+                    envelope2.dotNet = true;
+                    //Set output SOAP object
+                    envelope2.setOutputSoapObject(request2);
+                    //Create HTTP call object
+                    HttpTransportSE androidHttpTransport2 = new HttpTransportSE(Constants.URL);
 
 
-                    //Fill Client List
-                    androidHttpTransport2.call(SOAP_ACTION5, envelope2);
-                    SoapObject response2 = (SoapObject) envelope2.getResponse();
-                    for (int i = 0; i < response2.getPropertyCount(); i++) {
+                        //Fill Client List
+                        androidHttpTransport2.call(SOAP_ACTION5, envelope2);
+                        SoapObject response2 = (SoapObject) envelope2.getResponse();
+                        for (int i = 0; i < response2.getPropertyCount(); i++) {
 
-                        Object property2 = response2.getProperty(i);
-                        SoapObject info2 = (SoapObject) property2;
-                        listCaseReasons.add(new CaseReason(info2.getProperty("Reason").toString().trim(), info2.getProperty("ReasonID").toString().trim()));
-                    }
-                listCaseReasons.remove(0);
-                listCaseReasons.add(0,new CaseReason("Select Area", "0"));
+                            Object property2 = response2.getProperty(i);
+                            SoapObject info2 = (SoapObject) property2;
+                            listCaseReasons.add(new CaseReason(info2.getProperty("Reason").toString().trim(), info2.getProperty("ReasonID").toString().trim()));
+                        }
+                    listCaseReasons.remove(0);
+                    listCaseReasons.add(0,new CaseReason("Select Area", "0"));
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -328,9 +369,15 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
             if(null != progressDialog && (progressDialog.isShowing())){
                 progressDialog.dismiss();
             }
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
-            spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-            spinner.setAdapter(spinnerArrayAdapter);
+            if(spm.getBoolean("IsSupport", false)) {
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
+                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(spinnerArrayAdapter);
+            } else {
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
+                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner5.setAdapter(spinnerArrayAdapter);
+            }
 
             ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listSeverity);
             spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );

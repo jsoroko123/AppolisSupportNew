@@ -13,13 +13,14 @@
         android:background="@color/Gray00">
 
         <TextView
-
+            android:id="@+id/tvErrorClient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textSize="12dp"
-            android:layout_weight="5"
-            android:text="Client: "/>
+            android:layout_marginRight="10dp"
+            android:layout_weight="3"
+            android:text="Environment: "/>
 
         <Spinner
             android:id="@+id/spinnerErrorClients"

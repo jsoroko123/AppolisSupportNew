@@ -124,7 +124,7 @@ public class CasesAdapter extends ArrayAdapter<SupportCases> {
 				@Override
 				public void onClick(View v) {
 
-
+					Utilities.ShowDialog("Feature Not Available","Feature Not Available", getContext());
 				
 				}
 			});
@@ -133,7 +133,7 @@ public class CasesAdapter extends ArrayAdapter<SupportCases> {
 			
 			@Override
 			public void onClick(View v) {
-
+				Utilities.ShowDialog("Feature Not Available","Feature Not Available", getContext());
 				
 			}
 		});
@@ -268,8 +268,6 @@ public class CasesAdapter extends ArrayAdapter<SupportCases> {
 				if(MainActivity.isSupport){
 					itemDetailHolder.swipeBtStartTimer.setVisibility(View.VISIBLE);
 					itemDetailHolder.swipeBtStopTimer.setVisibility(View.VISIBLE);
-					itemDetailHolder.swipeBtStartTimer.setEnabled(false);
-					itemDetailHolder.swipeBtStopTimer.setEnabled(false);
 					itemDetailHolder.swipeBtAssign.setVisibility(View.VISIBLE);
 					itemDetailHolder.swipeBtStatus.setVisibility(View.VISIBLE);
 					itemDetailHolder.swipBtnContact.setVisibility(View.VISIBLE);

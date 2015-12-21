@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
@@ -21,6 +22,7 @@ import com.support.adapters.ExpandableListAdapter;
 import com.support.objects.ErrorChild;
 import com.support.objects.ErrorParent;
 import com.support.utilities.Constants;
+import com.support.utilities.SharedPreferenceManager;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -39,11 +41,15 @@ public class ErrorsFragment extends Fragment {
 	private ArrayList<String> listClients = new ArrayList<String>();
 
 	private Spinner spinner;
+	private TextView tvErrorClient;
 
 	private final String METHOD_NAME = "ListClientErrors";
 	private final String SOAP_ACTION = Constants.NAMESPACE+METHOD_NAME;
 	private final String METHOD_NAME2 = "ListClients";
 	private final String SOAP_ACTION2 = Constants.NAMESPACE+METHOD_NAME2;
+	private final String METHOD_NAME6 = "ListClientSites";
+	private final String SOAP_ACTION6 = Constants.NAMESPACE+METHOD_NAME6;
+	private SharedPreferenceManager spm;
 
 	public ErrorsFragment() {
 	}
@@ -54,8 +60,26 @@ public class ErrorsFragment extends Fragment {
 		MainActivity.FragPageTitle = "Integration Errors";
 		View rootView = inflater.inflate(R.layout.fragment_errors, container,
 				false);
-
+		spm = new SharedPreferenceManager(getActivity());
 		lvErrors = (ExpandableListView) rootView.findViewById(R.id.attach_list);
+		lvErrors.setChoiceMode(ExpandableListView.CHOICE_MODE_SINGLE);
+		lvErrors.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+			int previousGroup = -1;
+
+			@Override
+			public void onGroupExpand(int groupPosition) {
+				if(groupPosition != previousGroup)
+					lvErrors.collapseGroup(previousGroup);
+				previousGroup = groupPosition;
+			}
+		});
+
+		tvErrorClient=(TextView)rootView.findViewById(R.id.tvErrorClient);
+		if(spm.getBoolean("IsSupport", false)) {
+			tvErrorClient.setText("Client:");
+		}else{
+			tvErrorClient.setText("Environment:");
+		}
 		spinner=(Spinner)rootView.findViewById(R.id.spinnerErrorClients);
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -223,32 +247,62 @@ public class ErrorsFragment extends Fragment {
 
 			@Override
 			protected Void doInBackground(String... params) {
-				//Create request
-				SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME2);
-				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-						SoapEnvelope.VER11);
-				envelope.dotNet = true;
-				//Set output SOAP object
-				envelope.setOutputSoapObject(request);
-				//Create HTTP call object
-				HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
-
 				try {
-					//Fill Client List
-					androidHttpTransport.call(SOAP_ACTION2, envelope);
-					SoapObject response = (SoapObject) envelope.getResponse();
-					for (int i = 0; i < response.getPropertyCount(); i++) {
+					if(spm.getBoolean("IsSupport", false)) {
 
-						Object property = response.getProperty(i);
-						SoapObject info = (SoapObject) property;
-						listClients.add(info.getProperty("ClientName").toString().trim());
+						SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME2);
+						SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+								SoapEnvelope.VER11);
+						envelope.dotNet = true;
+						//Set output SOAP object
+						envelope.setOutputSoapObject(request);
+						//Create HTTP call object
+						HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+
+
+						//Fill Client List
+						androidHttpTransport.call(SOAP_ACTION2, envelope);
+						SoapObject response = (SoapObject) envelope.getResponse();
+						for (int i = 0; i < response.getPropertyCount(); i++) {
+
+							Object property = response.getProperty(i);
+							SoapObject info = (SoapObject) property;
+							listClients.add(info.getProperty("ClientName").toString().trim());
+						}
+
+						listClients.add(0, "Select Client");
+					} else {
+
+						SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME6);
+						PropertyInfo supportCasesPI = new PropertyInfo();
+						supportCasesPI.setName("clientName");
+						supportCasesPI.setValue(spm.getString("ClientName",""));
+						supportCasesPI.setType(String.class);
+						request.addProperty(supportCasesPI);
+						SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+								SoapEnvelope.VER11);
+						envelope.dotNet = true;
+						//Set output SOAP object
+						envelope.setOutputSoapObject(request);
+						//Create HTTP call object
+						HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+
+
+						//Fill Client List
+						androidHttpTransport.call(SOAP_ACTION6, envelope);
+						SoapObject response = (SoapObject) envelope.getResponse();
+						for (int i = 0; i < response.getPropertyCount(); i++) {
+
+							Object property = response.getProperty(i);
+							SoapObject info = (SoapObject) property;
+							listClients.add(info.getProperty("ClientName").toString().trim());
+						}
 					}
-
-					listClients.add(0, "Select Client");
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
+
 
 
 				return null;

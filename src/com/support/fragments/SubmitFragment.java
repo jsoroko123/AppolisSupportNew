@@ -48,8 +48,6 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
 	private final String SOAP_ACTION = Constants.NAMESPACE+METHOD_NAME;
     private final String METHOD_NAME2 = "ListClientUsers";
     private final String SOAP_ACTION2 = Constants.NAMESPACE+METHOD_NAME2;
-    private final String METHOD_NAME3 = "UploadImage";
-    private final String SOAP_ACTION3 = Constants.NAMESPACE+METHOD_NAME3;
     private final String METHOD_NAME4 = "InsertComments";
     private final String SOAP_ACTION4 = Constants.NAMESPACE+METHOD_NAME4;
     private final String METHOD_NAME5 = "ListCaseReasons";
@@ -207,7 +205,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
                 ClientIdByUsername cibu = new ClientIdByUsername(getActivity());
-                cibu.execute();
+                cibu.execute(listClients.get(position));
 
             }
 
@@ -640,6 +638,19 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         protected Void doInBackground(String... params) {
             //Create request
             SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME7);
+
+            PropertyInfo supportCasesPI = new PropertyInfo();
+            supportCasesPI.setName("ClientName");
+            supportCasesPI.setValue(params[0]);
+            supportCasesPI.setType(Integer.class);
+            request.addProperty(supportCasesPI);
+
+            supportCasesPI = new PropertyInfo();
+            supportCasesPI.setName("UserName");
+            supportCasesPI.setValue(spm.getString("UserName", ""));
+            supportCasesPI.setType(Integer.class);
+            request.addProperty(supportCasesPI);
+
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                     SoapEnvelope.VER11);
             envelope.dotNet = true;
@@ -650,7 +661,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
 
             try {
                 //Invole web service
-                androidHttpTransport.call(SOAP_ACTION2, envelope);
+                androidHttpTransport.call(SOAP_ACTION7, envelope);
                 SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
                 MainActivity.clientUserID = Integer.valueOf(response.toString());
 

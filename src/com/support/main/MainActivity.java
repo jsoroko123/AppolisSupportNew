@@ -769,12 +769,22 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 		return mIsInForegroundMode;
 	}
 
-
+	private Toast toast;
+	private long lastBackPressTime = 0;
 	@Override
 	public void onBackPressed() {
 		int count = getFragmentManager().getBackStackEntryCount();
-		if (count == 0){
-			super.onBackPressed();
+		if (count == 0 || MainActivity.FragPageTitle.contains("Support Cases") || MainActivity.FragPageTitle.contains("Submit")){
+			if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+				toast = Toast.makeText(this, "Press back again to close application.", Toast.LENGTH_LONG);
+				toast.show();
+				this.lastBackPressTime = System.currentTimeMillis();
+			} else {
+				if (toast != null) {
+					toast.cancel();
+				}
+				finish();
+			}
 		} else {
 			getFragmentManager().popBackStack();
 			if (MainActivity.FragPageTitle.matches(".*\\d+.*")) {

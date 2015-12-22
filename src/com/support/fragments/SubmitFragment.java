@@ -32,6 +32,7 @@ import com.support.utilities.Utilities;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import android.widget.AdapterView.OnItemClickListener;
@@ -55,6 +56,9 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     private final String SOAP_ACTION5 = Constants.NAMESPACE+METHOD_NAME5;
     private final String METHOD_NAME6 = "ListClientSites";
     private final String SOAP_ACTION6 = Constants.NAMESPACE+METHOD_NAME6;
+    private final String METHOD_NAME7 = "GetUserIdByClientName";
+    private final String SOAP_ACTION7 = Constants.NAMESPACE+METHOD_NAME7;
+
 
     public static String TAG = "PGGURU";
 	private ArrayList<String> listClients = new ArrayList<String>();
@@ -64,7 +68,6 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     public static ArrayList<String> listAttachments = new ArrayList<String>();
     public static ListView lvAttachList;
     ArrayAdapter<ClientUser> spinnerArrayAdapter;
-    ArrayAdapter<CaseReason> spinnerArrayAdapter2;
     private Button btnAttach;
     public static Spinner spinner;
     public static Spinner spinner2;
@@ -94,7 +97,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         uniqueID = UUID.randomUUID().toString();
         listAttachments.clear();
         spm = new SharedPreferenceManager(getActivity());
-
+        MainActivity.clientUserID = spm.getInt("UserID",0);
 		View rootView = inflater.inflate(R.layout.fragment_submit, container,
 				false);
 
@@ -187,6 +190,24 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
                 CaseReason s = (CaseReason) parentView.getItemAtPosition(position);
                 Object tag = s.tag;
                 spinReasonID = (String) tag;
+
+            }
+
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                ClientIdByUsername cibu = new ClientIdByUsername(getActivity());
+                cibu.execute();
 
             }
 
@@ -377,6 +398,9 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner5.setAdapter(spinnerArrayAdapter);
+
+                int spinnerPosition = spinnerArrayAdapter.getPosition(spm.getString("ClientName", ""));
+                spinner5.setSelection(spinnerPosition);
             }
 
             ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listSeverity);
@@ -595,6 +619,53 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         }
 
     }
+
+    private class ClientIdByUsername extends AsyncTask<String, Void, Void> {
+
+        Context context;
+
+        public ClientIdByUsername(Context mContext){
+            this.context = mContext;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(!isCancelled()){
+            }
+
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            //Create request
+            SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME7);
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            //Set output SOAP object
+            envelope.setOutputSoapObject(request);
+            //Create HTTP call object
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+
+            try {
+                //Invole web service
+                androidHttpTransport.call(SOAP_ACTION2, envelope);
+                SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                MainActivity.clientUserID = Integer.valueOf(response.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+        }
+
+    }
+
 
 
 }

@@ -891,6 +891,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 
 
 			} catch (Exception e) {
+				Utilities.ShowDialog("Error", e.getLocalizedMessage(), context);
 				e.printStackTrace();
 			}
 			return null;

@@ -93,6 +93,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
     public static boolean isSupport;
 	private static boolean mIsInForegroundMode;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+	public static int clientUserID;
 
 	private String support;
 	@Override
@@ -249,7 +250,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 					Toast.makeText(getApplication(), "All information must be filled in.", Toast.LENGTH_LONG).show();
 				} else {
 					SubmitFragment sf = new SubmitFragment();
-					sf.InsertNewCase(MainActivity.this, this, spm2.getInt("UserID", 0), String.valueOf(SubmitFragment.spinner3.getSelectedItemPosition() - 1), SubmitFragment.etSubject.getText().toString(), SubmitFragment.etMainComments.getText().toString(), SubmitFragment.uniqueID, String.valueOf(SubmitFragment.spinReasonID));
+					sf.InsertNewCase(MainActivity.this, this, MainActivity.clientUserID, String.valueOf(SubmitFragment.spinner3.getSelectedItemPosition() - 1), SubmitFragment.etSubject.getText().toString(), SubmitFragment.etMainComments.getText().toString(), SubmitFragment.uniqueID, String.valueOf(SubmitFragment.spinReasonID));
 				}
 			}
 

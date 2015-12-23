@@ -107,6 +107,31 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         tvObjectID.setText(parentRow.getObjectID().trim());
         TextView tvObjectNumber = (TextView) view.findViewById(R.id.tvErrorObjectNumber);
         tvObjectNumber.setText(parentRow.getObjectNumber().trim());
+        LinearLayout ll =  (LinearLayout) view.findViewById(R.id.ll_group);
+
+        if (parentRow.getObject().trim().contains("Integration Update")) {
+            view.setBackgroundResource(R.color.Orange);
+        } else  if (parentRow.getObject().trim().contains("ListCustomers")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("Error Program.cs")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ListItems")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ListPurchaseOrders")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ListVendors")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ListSalesInvoices")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ListOrders")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("ImportItemsDirect")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else  if (parentRow.getObject().trim().contains("Insert Invoice Order")) {
+            view.setBackgroundResource(R.color.Red1);
+        } else{
+            view.setBackgroundResource(R.color.white);
+        }
 
 
         return view;

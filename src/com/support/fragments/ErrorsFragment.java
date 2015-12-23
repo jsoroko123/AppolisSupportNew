@@ -30,7 +30,9 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ErrorsFragment extends Fragment {
 
@@ -179,6 +181,8 @@ public class ErrorsFragment extends Fragment {
 					String objectNumber = info.getProperty("WoWObjectNumber").toString().trim();
 					String description = info.getProperty("Desc").toString().trim();
 					String date = info.getProperty("DateCreated").toString().trim();
+					Date date2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(date);
+					String formattedDate = new SimpleDateFormat("MM/dd/yyyy hh:mm a").format(date2);
 					boolean rez = Boolean.valueOf(info.getProperty("ResolutionExists").toString().trim());
 
 					ErrorChild child = new ErrorChild(description);
@@ -186,12 +190,12 @@ public class ErrorsFragment extends Fragment {
 					childList = new ArrayList<ErrorChild>();
 					childList.add(child);
 
-					ErrorParent parent = new ErrorParent(client, object, objectID, objectNumber, date, rez, childList);
+					ErrorParent parent = new ErrorParent(client, object, objectID, objectNumber, formattedDate, rez, childList);
 					parent.setClientName(client);
 					parent.setObject(object);
 					parent.setObjectID(objectID);
 					parent.setObjectNumber(objectNumber);
-					parent.setDateCreated(date);
+					parent.setDateCreated(formattedDate);
 					parent.setHasResolution(rez);
 					theParentList.add(parent);
 

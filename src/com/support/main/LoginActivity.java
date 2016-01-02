@@ -5,6 +5,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.example.appolissupport.R;
+import com.support.custom.CustomProgressBar;
 import com.support.objects.User;
 import com.support.utilities.Constants;
 import com.support.utilities.SharedPreferenceManager;
@@ -97,7 +98,6 @@ public class LoginActivity extends Activity {
 	private class AsyncCallWS extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		Dialog d;
 
 		public AsyncCallWS(Context mContext){
@@ -108,18 +108,7 @@ public class LoginActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			if(!isCancelled()){
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Validating User...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false, "Validating");
 			}
 
 		}
@@ -171,9 +160,7 @@ public class LoginActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 
-			if(null != progressDialog && (progressDialog.isShowing())){
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
 
 			if(isValidLogin){
 				Intent mainScreenIntent = new Intent(getApplicationContext(),MainActivity.class);

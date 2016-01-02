@@ -25,11 +25,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.support.custom.CustomProgressBar;
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.fortysevendeg.swipelistview.BaseSwipeListViewListener;
@@ -67,11 +70,14 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 	private final String SOAP_ACTION6 = Constants.NAMESPACE+METHOD_NAME6;
 	private final String METHOD_NAME7 = "DeleteReminder";
 	private final String SOAP_ACTION7 = Constants.NAMESPACE+METHOD_NAME7;
+	private final String METHOD_NAME8 = "ListClientSites";
+	private final String SOAP_ACTION8 = Constants.NAMESPACE+METHOD_NAME8;
 
 	public static String TAG = "PGGURU";
 	private static PullToRefreshSwipeListView lvSupportCasesList;
 	private SwipeListView swipeList;
 	private ArrayList<SupportCases> listItemInfo = new ArrayList<SupportCases>();
+	private static ArrayList<String> listClients = new ArrayList<String>();
 	public static ArrayList<String> listItemSupportUsers = new ArrayList<String>();
 	public static CasesAdapter casesAdapter = null;
     public static SharedPreferenceManager spm;
@@ -90,6 +96,8 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 	private boolean isUser;
 	private EditText etNotes;
 	private static TextView noCases;
+	public static LinearLayout llCasesEnvironment;
+	private static Spinner spinner;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -100,6 +108,10 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         getActivity().getActionBar().setDisplayShowTitleEnabled(true);
         getActivity().getActionBar().setTitle(MainActivity.FragPageTitle);
+		if(!MainActivity.isSupport) {
+			final ListClientEnvironments lce = new ListClientEnvironments(getActivity());
+			lce.execute();
+		}
 		final ListSupportUsers up = new ListSupportUsers(getActivity());
 		up.execute();
 		start = 1;
@@ -115,17 +127,75 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		View rootView = inflater.inflate(R.layout.fragment_cases, container,
 				false);
 		start = 1;
-
+		llCasesEnvironment = (LinearLayout) rootView.findViewById(R.id.llCasesEnvironment);
 		lvSupportCasesList = (PullToRefreshSwipeListView) rootView.findViewById(R.id.lv_support_cases);
 		lvSupportCasesList.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
 		lvSupportCasesList.setOnItemClickListener(this);
 		swipeList = lvSupportCasesList.getRefreshableView();
+		spinner=(Spinner)rootView.findViewById(R.id.spinnerErrorClients);
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				spm.saveString("Client", listClients.get(position));
+				if(MainActivity.userIsInteracting) {
+					if(!spm.getString("Search", "").isEmpty()){
+						search = spm.getString("Search", "");
+					} else {
+						search = "";
+					}
 
+					if(!spm.getString("Status", "").isEmpty()){
+						status = spm.getString("Status", "");
+					} else {
+						status = "Open";
+					}
+
+					if(!spm.getString("Client", "").isEmpty()){
+						client = spm.getString("Client", "");
+					} else {
+						client = ClientName;
+					}
+
+					if(!spm.getString("Type", "").isEmpty()){
+						type = spm.getString("Type", "");
+					} else {
+						type = "Support";
+					}
+
+
+					if (spm.getBoolean("MyCases", false)) {
+						isUser = true;
+					} else {
+						isUser = false;
+					}
+
+					if (spm.getBoolean("DateRange", false)) {
+						fDate = spm.getString("FromDate", "");
+						tDate = spm.getString("ToDate", "");
+					} else {
+
+						fDate = "1800-01-01";
+						tDate = "2222-02-01";
+					}
+
+					refreshData(getActivity(), status, listClients.get(position), type, search, fDate, tDate, spm.getInt("UserID", 0), false, isUser, spm.getBoolean("IsSupport", false));
+				}
+			}
+
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				// your code here
+			}
+
+		});
 		if(spm.getBoolean("IsSupport", false)){
 			ClientName = "0";
+			llCasesEnvironment.setVisibility(View.GONE);
 
 		} else {
 			ClientName = spm.getString("ClientName", "");
+			llCasesEnvironment.setVisibility(View.VISIBLE);
 		}
 
 		noCases = (TextView) rootView.findViewById(R.id.tvNoCases);
@@ -171,7 +241,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 							type = spm.getString("Type", "");
 						} else {
 							type = "Support";
-						}
+							}
 
 
 						if (spm.getBoolean("MyCases", false)) {
@@ -204,7 +274,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 	private class AsyncCallWS extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
+		//ProgressDialog progressDialog;
 		String caseStatus;
 		String client;
 		String type;
@@ -236,19 +306,8 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 			listItemInfo.clear();
 			super.onPreExecute();
 			if(!isCancelled()){
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Loading...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-							@Override
-							public void onCancel(DialogInterface dialog) {
-								cancel(true);
-							}
-						});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
                 if(!isRefresh) {
-                    progressDialog.show();
+					CustomProgressBar.showProgressBar(context, false);
                 }
 			}
 
@@ -361,9 +420,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
                 lvSupportCasesList.onRefreshComplete();
                 casesAdapter = new CasesAdapter(context,
                         listItemInfo);
@@ -374,7 +431,9 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
     		casesAdapter.notifyDataSetChanged();
 
 			if(listItemInfo.isEmpty()){
+				noCases.setText("No "+caseStatus+" Cases Found");
 				noCases.setVisibility(View.VISIBLE);
+
 			} else{
 				noCases.setVisibility(View.GONE);
 			}
@@ -464,6 +523,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 				transaction.replace(R.id.linear, newFragment);
 				transaction.addToBackStack(null);
 				transaction.commit();
+				llCasesEnvironment.setVisibility(View.GONE);
             }
 
 			@Override
@@ -606,7 +666,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
 				Object o = lv.getItemAtPosition(position);
-                SupportUserName = o.toString();
+				SupportUserName = o.toString();
 			}
 		});
 
@@ -715,10 +775,11 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 
 	}
 
+
+
 	private class UpdateCaseStatus extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		int caseNumber;
 		int userID;
 
@@ -734,18 +795,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		protected void onPreExecute() {
 			super.onPreExecute();
 			if (!isCancelled()) {
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Updating Case Status...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false);
 			}
 		}
 
@@ -795,9 +845,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		@Override
 		protected void onPostExecute(Void result) {
 			Log.i(TAG, "onPostExecute");
-			if (null != progressDialog && (progressDialog.isShowing())) {
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
 
 
 			if(!spm.getString("Search", "").isEmpty()){
@@ -910,7 +958,6 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 
 		Context context;
 		int CaseID;
-		ProgressDialog progressDialog;
 
 		public CaseNotes(Context mContext, int mCaseID){
 			this.context = mContext;
@@ -922,18 +969,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 			super.onPreExecute();
 			if(!isCancelled()){
 			}
-			progressDialog = new ProgressDialog(context);
-			progressDialog.setMessage("Loading...");
-			progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					cancel(true);
-				}
-			});
-			progressDialog.setCanceledOnTouchOutside(false);
-			progressDialog.setCancelable(false);
-			progressDialog.show();
+			CustomProgressBar.showProgressBar(context, false);
 
 		}
 
@@ -980,9 +1016,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 
 		@Override
 		protected void onPostExecute(Void result) {
-			if (null != progressDialog && (progressDialog.isShowing())) {
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
 			LayoutInflater li = LayoutInflater.from(context);
 			View promptsView = li.inflate(R.layout.dialogscanner6, null);
 
@@ -1037,7 +1071,6 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
     private class UpdateCaseAssignment extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
         int caseNumber;
         int userID;
 
@@ -1053,18 +1086,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
         protected void onPreExecute() {
             super.onPreExecute();
             if (!isCancelled()) {
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Updating Case Status...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+               CustomProgressBar.showProgressBar(context, false);
             }
         }
 
@@ -1114,10 +1136,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if (null != progressDialog && (progressDialog.isShowing())) {
-                progressDialog.dismiss();
-            }
-
+			CustomProgressBar.hideProgressBar();
 
             if(!spm.getString("Search", "").isEmpty()){
                 search = spm.getString("Search", "");
@@ -1167,7 +1186,6 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 	public class InsertReminder extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		int caseID;
 		int userID;
 		String notes;
@@ -1180,24 +1198,11 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 			this.notes = mNotes;
 		}
 
-
-
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			if(!isCancelled()){
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Submitting Case...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false);
 			}
 		}
 
@@ -1256,9 +1261,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		@Override
 		protected void onPostExecute(Void result) {
 			Log.i(TAG, "onPostExecute");
-			if(null != progressDialog && (progressDialog.isShowing())){
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
 		}
 
 	}
@@ -1266,7 +1269,6 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 	public class DeleteReminder extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		int caseID;
 
 		public DeleteReminder(Context mContext, int mCaseID){
@@ -1280,18 +1282,7 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		protected void onPreExecute() {
 			super.onPreExecute();
 			if(!isCancelled()){
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Submitting Case...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false);
 			}
 		}
 
@@ -1326,10 +1317,74 @@ public class CasesFragment extends Fragment implements OnClickListener, OnItemCl
 		@Override
 		protected void onPostExecute(Void result) {
 			Log.i(TAG, "onPostExecute");
-			if(null != progressDialog && (progressDialog.isShowing())){
-				progressDialog.dismiss();
+			CustomProgressBar.hideProgressBar();
+		}
+
+
+
+	}
+
+	private class ListClientEnvironments extends AsyncTask<String, Void, Void> {
+
+		Context context;
+
+		public ListClientEnvironments(Context mContext){
+			this.context = mContext;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			listClients.clear();
+			super.onPreExecute();
+			if(!isCancelled()){
+				CustomProgressBar.showProgressBar(context, false);
 			}
 		}
 
+		@Override
+		protected Void doInBackground(String... params) {
+			try {
+
+				SoapObject request = new SoapObject(Constants.NAMESPACE, METHOD_NAME8);
+				PropertyInfo supportCasesPI = new PropertyInfo();
+				supportCasesPI.setName("clientName");
+				supportCasesPI.setValue(spm.getString("ClientName",""));
+				supportCasesPI.setType(String.class);
+				request.addProperty(supportCasesPI);
+				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+						SoapEnvelope.VER11);
+				envelope.dotNet = true;
+				//Set output SOAP object
+				envelope.setOutputSoapObject(request);
+				//Create HTTP call object
+				HttpTransportSE androidHttpTransport = new HttpTransportSE(Constants.URL);
+
+				androidHttpTransport.call(SOAP_ACTION8, envelope);
+				SoapObject response = (SoapObject) envelope.getResponse();
+				for (int i = 0; i < response.getPropertyCount(); i++) {
+
+					Object property = response.getProperty(i);
+					SoapObject info = (SoapObject) property;
+					listClients.add(info.getProperty("ClientName").toString().trim());
+
+				}
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+
+CustomProgressBar.hideProgressBar();
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
+			spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+			spinner.setAdapter(spinnerArrayAdapter);
+		}
 	}
 }

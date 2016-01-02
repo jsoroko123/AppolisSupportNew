@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.support.custom.CustomProgressBar;
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.adapters.AttachAdapter;
@@ -302,7 +303,6 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
     private class InsertResponse extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
         int caseNumber;
         int userID;
         int support;
@@ -326,18 +326,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         protected void onPreExecute() {
             super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Submitting to Case...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                CustomProgressBar.showProgressBar(context, false);
             }
         }
 
@@ -447,10 +436,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
-
+            CustomProgressBar.hideProgressBar();
             etResponse.setText("");
 
             refresh(getActivity(), String.valueOf(caseNumber), true);
@@ -462,7 +448,6 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
     private class UploadFile extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
         String image;
         String filename;
         String caseNumber;
@@ -481,18 +466,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         protected void onPreExecute() {
             super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Uploading... Please Wait.");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                CustomProgressBar.showProgressBar(context, false);
             }
          }
 
@@ -551,9 +525,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
+            CustomProgressBar.hideProgressBar();
 
             listAttachments.clear();
             AsyncCallWS2 mLoadDataTask = new AsyncCallWS2(context);
@@ -573,7 +545,6 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
         String caseNum;
         boolean showProgress = false;
 
@@ -590,20 +561,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
 
             super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Loading...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                if(showProgress) {
-                    progressDialog.show();
-                }
+               CustomProgressBar.showProgressBar(context, false);
             }
         }
 
@@ -643,7 +601,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
                     cds.setName(info.getProperty("Name").toString().trim());
                     String strippedResponse = info.getProperty("Response").toString().trim().replaceAll("\\<.*?>","").trim();
                     cds.setResponse(strippedResponse);
-                    cds.setResponse(info.getProperty("Response").toString().trim());
+                    cds.setResponse(info.getProperty("Response").toString().trim().replaceFirst("Issue:","Issue: "+info.getProperty("Subject").toString()+"\n"));
                     cds.setSubject(info.getProperty("Subject").toString().trim());
                     cds.setPhone(info.getProperty("Phone").toString().trim());
                     cds.setClientPhone(info.getProperty("ClientPhone").toString().trim());
@@ -706,9 +664,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
+            CustomProgressBar.hideProgressBar();
             detailsAdapter = new DetailsAdapter(context,
                     listItemInfo);
 
@@ -729,7 +685,6 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
     private class AsyncCallWS2 extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
 
         public AsyncCallWS2(Context mContext){
             this.context = mContext;
@@ -742,18 +697,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
 
             super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Loading...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                CustomProgressBar.showProgressBar(context, false);
             }
         }
 
@@ -808,9 +752,7 @@ public class DetailsFragment extends Fragment implements OnClickListener, OnItem
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
+            CustomProgressBar.hideProgressBar();
             attachAdapter = new AttachAdapter(context,
                     listAttachments);
 

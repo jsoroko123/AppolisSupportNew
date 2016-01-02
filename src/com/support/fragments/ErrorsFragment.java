@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.support.custom.CustomProgressBar;
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.adapters.ExpandableListAdapter;
@@ -119,7 +120,6 @@ public class ErrorsFragment extends Fragment {
 	private class ListErrors extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		String client;
 
 		public ListErrors(Context mContext, String mClient) {
@@ -132,18 +132,7 @@ public class ErrorsFragment extends Fragment {
 
 			super.onPreExecute();
 			if (!isCancelled()) {
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Loading...");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false);
 				theParentList.clear();
 			}
 
@@ -211,9 +200,7 @@ public class ErrorsFragment extends Fragment {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			if (null != progressDialog && (progressDialog.isShowing())) {
-				progressDialog.dismiss();
-			}
+			CustomProgressBar.hideProgressBar();
 			listAdapter = new ExpandableListAdapter(getActivity(), theParentList);
 			listAdapter.notifyDataSetChanged();
 			lvErrors.setAdapter(listAdapter);
@@ -230,7 +217,6 @@ public class ErrorsFragment extends Fragment {
 		private class ListClients extends AsyncTask<String, Void, Void> {
 
 			Context context;
-			ProgressDialog progressDialog;
 
 			public ListClients(Context mContext){
 				this.context = mContext;
@@ -241,18 +227,7 @@ public class ErrorsFragment extends Fragment {
 				listClients.clear();
 				super.onPreExecute();
 				if(!isCancelled()){
-					progressDialog = new ProgressDialog(context);
-					progressDialog.setMessage("Loading...");
-					progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-						@Override
-						public void onCancel(DialogInterface dialog) {
-							cancel(true);
-						}
-					});
-					progressDialog.setCanceledOnTouchOutside(false);
-					progressDialog.setCancelable(false);
-					progressDialog.show();
+					CustomProgressBar.showProgressBar(context, false);
 				}
 			}
 
@@ -322,9 +297,7 @@ public class ErrorsFragment extends Fragment {
 			@Override
 			protected void onPostExecute(Void result) {
 
-				if(null != progressDialog && (progressDialog.isShowing())){
-					progressDialog.dismiss();
-				}
+				CustomProgressBar.hideProgressBar();
 				ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
 				spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
 				spinner.setAdapter(spinnerArrayAdapter);

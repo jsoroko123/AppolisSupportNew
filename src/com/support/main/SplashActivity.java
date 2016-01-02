@@ -2,10 +2,12 @@ package com.support.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.example.appolissupport.R;
 import com.support.utilities.SharedPreferenceManager;
@@ -15,6 +17,8 @@ public class SplashActivity extends Activity {
     private SharedPreferenceManager spm;
     private int sleepTime;
     private int countForSplash;
+    ImageView img;
+    private AnimationDrawable frameAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,15 @@ public class SplashActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         spm = new SharedPreferenceManager(this);
+        img = (ImageView) findViewById(R.id.img_logo);
+        img.setBackgroundResource(R.drawable.logo_blur);
+
+        frameAnimation = (AnimationDrawable) img.getBackground();
+        //set true if you want to animate only once
+        frameAnimation.setOneShot(true);
+        frameAnimation.start();
+
+
         Thread WelcomeScreen = new Thread() {
 
             public void run() {
@@ -30,14 +43,14 @@ public class SplashActivity extends Activity {
 
                     if(spm.getInt("SplashCount", 0) == 0) {
 
-                        sleepTime = 5000;
+                        sleepTime = 6000;
                     }
                     else if(spm.getInt("SplashCount", 0) == 5){
                             spm.saveInt("SplashCount",0);
-                        sleepTime = 5000;
+                        sleepTime = 6000;
 
                     } else {
-                        sleepTime = 0;
+                        sleepTime = 6000;
                     }
 
                     spm.saveInt("SplashCount", spm.getInt("SplashCount", 0) + 1);

@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appolissupport.R;
+import com.support.custom.CustomProgressBar;
 import com.support.fragments.CasesFragment;
 import com.support.fragments.ClientsFragment;
 import com.support.fragments.ErrorsFragment;
@@ -94,6 +95,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 	private static boolean mIsInForegroundMode;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 	public static int clientUserID;
+	public static boolean userIsInteracting = false;
 
 	private String support;
 	@Override
@@ -627,7 +629,6 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 	public class UploadFile extends AsyncTask<String, Void, Void> {
 
 		Context context;
-		ProgressDialog progressDialog;
 		String image;
 		String filename;
 		String caseNumber;
@@ -646,18 +647,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 		protected void onPreExecute() {
 			super.onPreExecute();
 			if(!isCancelled()){
-				progressDialog = new ProgressDialog(context);
-				progressDialog.setMessage("Uploading... Please Wait.");
-				progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						cancel(true);
-					}
-				});
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.show();
+				CustomProgressBar.showProgressBar(context, false);
 			}
 		}
 
@@ -718,12 +708,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 		@Override
 		protected void onPostExecute(Void result) {
 			Log.i(TAG, "onPostExecute");
-			if(null != progressDialog && (progressDialog.isShowing())){
-				progressDialog.dismiss();
-			}
-
-
-
+			CustomProgressBar.hideProgressBar();
 			SubmitFragment.listAttachments.add(filename);
 			ArrayAdapter<String> attachArrayAdapter = new ArrayAdapter<String>(getApplication(), R.layout.spinner_item, SubmitFragment.listAttachments);
 			SubmitFragment.lvAttachList.setAdapter(attachArrayAdapter);
@@ -774,7 +759,7 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 	@Override
 	public void onBackPressed() {
 		int count = getFragmentManager().getBackStackEntryCount();
-		if (count == 0 || MainActivity.FragPageTitle.contains("Support Cases") || MainActivity.FragPageTitle.contains("Submit")){
+		if (count == 0 || MainActivity.FragPageTitle.contains("Support Cases") || MainActivity.FragPageTitle.contains("Submit") || MainActivity.FragPageTitle.contains("Errors") || MainActivity.FragPageTitle.contains("Client List") || MainActivity.FragPageTitle.contains("Statistics")){
 			if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
 				toast = Toast.makeText(this, "Press back again to close application.", Toast.LENGTH_LONG);
 				toast.show();
@@ -790,7 +775,16 @@ public class MainActivity extends Activity implements FragmentManager.OnBackStac
 			if (MainActivity.FragPageTitle.matches(".*\\d+.*")) {
 				setTitle("Support Cases");
 				MainActivity.FragPageTitle="Support Cases";
+				if(!isSupport) {
+					CasesFragment.llCasesEnvironment.setVisibility(View.VISIBLE);
+				}
 			}
 		}
+	}
+
+	@Override
+	public void onUserInteraction() {
+		super.onUserInteraction();
+		userIsInteracting = true;
 	}
 }

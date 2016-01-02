@@ -112,11 +112,8 @@ public class DetailsAdapter extends ArrayAdapter<Details> {
 
 				String resp = item.getResponse().replace("<br/>", "\n");
 
-				if(resp.contains("Issue:")){
-					resp.replace("Issue: ", "Issue: "+item.getSubject()+"\n");
-				}
 			
-				itemDetailHolder.subject.setText(resp.replaceAll("\\<.*?>","").replace("||", "").replace("&nbsp;", " "));
+				itemDetailHolder.subject.setText(resp.replaceAll("\\<.*?>","").replace("||", "").replace("&nbsp;", " ").trim());
 //				itemDetailHolder.name.setText(item.getName());
 //				itemDetailHolder.date.setText(item.getDateCreated());
 

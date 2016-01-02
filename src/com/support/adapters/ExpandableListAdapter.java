@@ -107,7 +107,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         tvObjectID.setText(parentRow.getObjectID().trim());
         TextView tvObjectNumber = (TextView) view.findViewById(R.id.tvErrorObjectNumber);
         tvObjectNumber.setText(parentRow.getObjectNumber().trim());
-        LinearLayout ll =  (LinearLayout) view.findViewById(R.id.ll_group);
 
         if (parentRow.getObject().trim().contains("Integration Update")) {
             view.setBackgroundResource(R.color.Orange);

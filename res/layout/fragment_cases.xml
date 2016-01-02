@@ -4,13 +4,38 @@
 	android:id="@+id/linear"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+	<LinearLayout
+		android:id="@+id/llCasesEnvironment"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="5dp"
+		android:orientation="horizontal"
+		android:background="@color/Gray00">
+
+		<TextView
+			android:id="@+id/tvErrorClient"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:textSize="12dp"
+			android:layout_marginRight="10dp"
+			android:layout_weight="3"
+			android:text="Environment: "/>
+
+		<Spinner
+			android:id="@+id/spinnerErrorClients"
+			android:layout_weight="1"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
 
 
+
+	</LinearLayout>
 	<TextView
 		android:id="@+id/tvNoCases"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
-		android:text="No Open Cases"
+		android:text="No Cases Found"
 		android:textSize="20dp"
 		android:layout_marginTop="25dp"
 		android:visibility="gone"

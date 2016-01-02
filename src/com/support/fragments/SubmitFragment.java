@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.support.custom.CustomProgressBar;
 import com.support.main.MainActivity;
 import com.example.appolissupport.R;
 import com.support.objects.CaseReason;
@@ -116,10 +117,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         etSubject = (EditText)rootView.findViewById(R.id.etSubject);
         etMainComments = (EditText)rootView.findViewById(R.id.etResp);
         etMainComments.setSelection(0);
-        listClientUsers.add(new ClientUser("Select User", "0"));
-        spinnerArrayAdapter = new ArrayAdapter<ClientUser>(getActivity(), R.layout.spinner_item, listClientUsers);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(spinnerArrayAdapter);
+
 
         if(spm.getBoolean("IsSupport", false)){
             support = "1";
@@ -252,7 +250,6 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
 
 		Context context;
-        ProgressDialog progressDialog;
 
 		public AsyncCallWS(Context mContext){
 			this.context = mContext;
@@ -263,18 +260,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
 			listClients.clear();
 			super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Loading...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                CustomProgressBar.showProgressBar(context, false);
             }
 		}
 
@@ -384,10 +370,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
 
 		@Override
 		protected void onPostExecute(Void result) {
-
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
+            CustomProgressBar.hideProgressBar();
             if(spm.getBoolean("IsSupport", false)) {
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listClients);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -400,6 +383,11 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
                 int spinnerPosition = spinnerArrayAdapter.getPosition(spm.getString("ClientName", ""));
                 spinner5.setSelection(spinnerPosition);
             }
+
+            listClientUsers.add(new ClientUser("Select User", "0"));
+            spinnerArrayAdapter = new ArrayAdapter<ClientUser>(getActivity(), R.layout.spinner_item, listClientUsers);
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner2.setAdapter(spinnerArrayAdapter);
 
             ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, listSeverity);
             spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
@@ -490,7 +478,6 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
     public class InsertCase extends AsyncTask<String, Void, Void> {
 
         Context context;
-        ProgressDialog progressDialog;
         int userID;
         String severity;
         String commentTitle;
@@ -516,18 +503,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         protected void onPreExecute() {
             super.onPreExecute();
             if(!isCancelled()){
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Submitting Case...");
-                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        cancel(true);
-                    }
-                });
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                CustomProgressBar.showProgressBar(context, false);
             }
         }
 
@@ -601,9 +577,7 @@ public class SubmitFragment extends Fragment implements OnClickListener, OnItemC
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-            if(null != progressDialog && (progressDialog.isShowing())){
-                progressDialog.dismiss();
-            }
+            CustomProgressBar.hideProgressBar();
             Utilities.ShowDialog("Case Submitted", "Case Successfully Submitted to Appolis Support", context);
 
             spinner.setSelection(0);
